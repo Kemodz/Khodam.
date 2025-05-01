@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cek Khodam Kemodz</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      color: #333;
+      overflow-x: hidden;
+    }
+    .dark-mode {
+      background: #121212;
+      color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 40px 30px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+    }
+    .dark-mode .container {
+      background: #1f1f1f;
+    }
+    h1, h2 {
+      margin: 0 0 20px;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+    }
+    input {
+      background: #f1f1f1;
+    }
+    button {
+      background: #6c5ce7;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #574b90;
+    }
+    .toggle-mode {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #444;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 999;
+    }
+    .dark-mode .toggle-mode {
+      background: #eee;
+      color: #000;
+    }
+    .welcome {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out;
+    }
+    #resultBox {
+      margin-top: 25px;
+      display: none;
+      perspective: 1000px;
+    }
+    .card-wrapper {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+    .card {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      position: absolute;
+    }
+    .card.show {
+      transform: rotateY(180deg);
+    }
+    .card-face {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      border-radius: 12px;
+    }
+    .card-front {
+      background: #6c5ce7;
+      color: white;
+    }
+    .card-back {
+      background: #fff;
+      color: #333;
+      transform: rotateY(180deg);
+    }
+    .dark-mode .card-back {
+      background: #2c2c2c;
+      color: #eee;
+    }
+    .emoji-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: fall 4s linear infinite;
+    }
+    #khodamListBox {
+      margin-top: 20px;
+      display: none;
+      text-align: left;
+    }
+    #khodamListBox ul {
+      padding-left: 20px;
+    }
+    #leaderboard {
+      margin-top: 30px;
+      text-align: left;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-mode" onclick="toggleDarkMode()">🌙 / ☀️</div>
+  <div class="emoji-rain" id="emojiRain"></div>  <div class="container">
+    <div class="welcome">Selamat datang di cek khodam <strong>Kemodz</strong></div>
+    <h1>Cek Khodam Kartun Gokil</h1>
+    <input type="text" id="nameInput" placeholder="Masukkan nama kamu" />
+    <button onclick="cekKhodam()">Cek Khodam</button>
+    <button onclick="toggleKhodamList()">Lihat Daftar Khodam</button>
+    <div id="resultBox">
+      <div class="card-wrapper">
+        <div class="card" id="card">
+          <div class="card-face card-front">
+            <h2 id="khodamName">Khodam</h2>
+          </div>
+          <div class="card-face card-back">
+            <p id="khodamDesc"></p>
+            <p><em id="pesanHarian"></em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="khodamListBox">
+      <button onclick="toggleKhodamList()">Tutup List</button>
+      <ul id="khodamList"></ul>
+    </div>
+    <div id="leaderboard"></div>
+  </div>  <script>
+    const khodams = [
+      { name: "Upin Lagi Pup", desc: "Khodam yang muncul saat darurat.", rarity: 90 },
+      { name: "FahmiKasep", desc: "Langka banget, hanya 1% yang dapet.", rarity: 1 },
+      { name: "Spongebob Nyasar", desc: "Khodam licin tapi setia.", rarity: 40 },
+      { name: "Dora Ngeblank", desc: "Khodam suka lupa arah pulang.", rarity: 60 },
+      { name: "Patrick Sering Bengong", desc: "Bikin ketawa tapi bingung.", rarity: 70 },
+      { name: "Shinchan Ngegas", desc: "Suka muncul pas kamu panik.", rarity: 30 },
+      { name: "Tayo Ngebut", desc: "Khodam tercepat di Kemodz.", rarity: 20 },
+      { name: "Nobita Gagal Fokus", desc: "Sering salah teleport.", rarity: 65 },
+      { name: "Doraemon Kehabisan Gadget", desc: "Khodam low battery.", rarity: 50 },
+      { name: "Sasuke Tersesat", desc: "Baperan tapi kuat.", rarity: 45 },
+      { name: "Naruto Nyasar", desc: "Ninja ceroboh tapi keren.", rarity: 35 },
+      { name: "Mickey Ngopi", desc: "Khodam santai tapi berkelas.", rarity: 55 },
+      { name: "Donald Duck Ngambek", desc: "Bersuara aneh tapi peduli.", rarity: 60 },
+      { name: "Pikachu Kesetrum Sendiri", desc: "Lucu tapi ceroboh.", rarity: 40 },
+      { name: "Tom Ketiban Panci", desc: "Selalu apes tapi setia.", rarity: 50 },
+      { name: "Jerry Tukang Nyolong", desc: "Licik tapi lucu.", rarity: 45 },
+      { name: "Minion Salah Bahasa", desc: "Khodam multibahasa ngawur.", rarity: 55 },
+      { name: "Gru Ketinggalan Anak", desc: "Pemimpin pelupa.", rarity: 60 },
+      { name: "Mr. Bean Diam-Diam Sakti", desc: "Gak banyak omong tapi ampuh.", rarity: 30 },
+      { name: "Khodam Meme Lord", desc: "Bisa muncul di semua grup WA.", rarity: 25 }
+    ];
+
+    const pesanHarianList = [
+      "Hari ini kamu butuh cemilan.",
+      "Jangan lupa minum es teh.",
+      "Khodammu menyarankan tidur siang.",
+      "Waktunya rebahan.",
+      "Jangan terlalu serius, bro!"
+    ];
+
+    const leaderboardData = JSON.parse(localStorage.getItem("leaderboard_khodam") || '{}');
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function cekKhodam() {
+      const nama = document.getElementById('nameInput').value.trim().toLowerCase();
+      if (!nama) return alert("Masukkan nama dulu bro!");
+      const hash = Array.from(nama).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const khodam = khodams[hash % khodams.length];
+
+      document.getElementById('khodamName').textContent = khodam.name;
+      document.getElementById('khodamDesc').textContent = khodam.desc;
+      document.getElementById('pesanHarian').textContent = pesanHarianList[hash % pesanHarianList.length];
+      document.getElementById('resultBox').style.display = 'block';
+
+      const card = document.getElementById('card');
+      card.classList.remove('show');
+      setTimeout(() => card.classList.add('show'), 50);
+
+      if (khodam.rarity <= 5) {
+        launchConfetti();
+      }
+
+      leaderboardData[nama] = khodam.name;
+      localStorage.setItem("leaderboard_khodam", JSON.stringify(leaderboardData));
+      renderLeaderboard();
+    }
+
+    function launchConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.top = '-30px';
+        emoji.textContent = ['💥','✨','',''][Math.floor(Math.random()*4)] || '✨';
+        document.getElementById('emojiRain').appendChild(emoji);
+        setTimeout(() => emoji.remove(), 4000);
+      }
+    }
+
+    function toggleKhodamList() {
+      const box = document.getElementById('khodamListBox');
+      const ul = document.getElementById('khodamList');
+      if (box.style.display === 'none' || box.style.display === '') {
+        ul.innerHTML = khodams.map(k => `<li><strong>${k.name}</strong>: ${k.desc}</li>`).join('');
+        box.style.display = 'block';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    function renderLeaderboard() {
+      const lb = document.getElementById("leaderboard");
+      const entries = Object.entries(leaderboardData);
+      if (!entries.length) return;
+      lb.innerHTML = `<h3>Kompetisi Khodam</h3><ul>${entries.map(([nama, khodam]) => `<li><strong>${nama}</strong>: ${khodam}</li>`).join('')}</ul>`;
+    }
+
+    renderLeaderboard();
+  </script></body>
+</html>
