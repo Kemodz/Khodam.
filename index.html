@@ -1,268 +1,272 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cek Khodam Kemodz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SYNA WORLD ROLEPLAY</title>
   <style>
-    body {
+    body, html {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #f2f2f2;
-      color: #333;
+      background: linear-gradient(to bottom, #001d3d, #003566);
+      color: #fff;
       overflow-x: hidden;
     }
-    .dark-mode {
-      background: #121212;
-      color: #f0f0f0;
-    }
-    .container {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 40px 30px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      position: relative;
-    }
-    .dark-mode .container {
-      background: #1f1f1f;
-    }
-    h1, h2 {
-      margin: 0 0 20px;
-    }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-    }
-    input {
-      background: #f1f1f1;
-    }
-    button {
-      background: #6c5ce7;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #574b90;
-    }
-    .toggle-mode {
+
+    #intro-screen {
       position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #444;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100vh;
+      background: radial-gradient(circle at center, #001d3d 30%, #000814 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #intro-screen h1 {
+      font-size: 3.5em;
+      margin-bottom: 25px;
+      text-align: center;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #intro-screen button {
+      background: #25D366;
       color: white;
-      padding: 8px 12px;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
       border-radius: 10px;
       cursor: pointer;
-      z-index: 999;
+      box-shadow: 0 0 15px #25D366;
+      transition: all 0.3s ease;
     }
-    .dark-mode .toggle-mode {
-      background: #eee;
-      color: #000;
+
+    #intro-screen button:hover {
+      background: #1ebc5c;
+      box-shadow: 0 0 25px #1ebc5c;
     }
-    .welcome {
-      font-size: 1.2rem;
+
+    .hidden { display: none; }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1589820296151-245e1c94b394?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    header h1 {
+      font-size: 4em;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #00c9ff;
+    }
+
+    header p {
+      font-size: 1.3em;
+      max-width: 600px;
+      margin: 20px auto;
+      color: #cceeff;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2em;
+      border-left: 5px solid #00c9ff;
+      padding-left: 15px;
       margin-bottom: 20px;
-      animation: fadeIn 2s ease-out;
     }
-    #resultBox {
-      margin-top: 25px;
-      display: none;
-      perspective: 1000px;
-    }
-    .card-wrapper {
-      width: 100%;
-      height: 200px;
-      position: relative;
-    }
+
     .card {
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-      position: absolute;
-    }
-    .card.show {
-      transform: rotateY(180deg);
-    }
-    .card-face {
-      backface-visibility: hidden;
-      position: absolute;
-      width: 100%;
-      height: 100%;
+      background: #002855;
       padding: 20px;
-      box-sizing: border-box;
       border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0, 201, 255, 0.2);
     }
-    .card-front {
-      background: #6c5ce7;
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #001524;
+      color: #777;
+    }
+
+    .staff {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .staff div {
+      background: #013a63;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+    }
+
+    a.button-wa {
+      display: inline-block;
+      background: #25D366;
       color: white;
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px #25D366;
+      transition: 0.3s ease;
     }
-    .card-back {
-      background: #fff;
-      color: #333;
-      transform: rotateY(180deg);
+
+    a.button-wa:hover {
+      background: #1ebc5c;
+      box-shadow: 0 0 20px #1ebc5c;
     }
-    .dark-mode .card-back {
-      background: #2c2c2c;
-      color: #eee;
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
     }
-    .emoji-rain {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1000;
-    }
-    .emoji {
-      position: absolute;
-      font-size: 24px;
-      animation: fall 4s linear infinite;
-    }
-    #khodamListBox {
-      margin-top: 20px;
-      display: none;
-      text-align: left;
-    }
-    #khodamListBox ul {
-      padding-left: 20px;
-    }
-    #leaderboard {
-      margin-top: 30px;
-      text-align: left;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-100px); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
+
+    .features div {
+      background: #01497c;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 153, 255, 0.2);
     }
   </style>
 </head>
 <body>
-  <div class="toggle-mode" onclick="toggleDarkMode()">🌙 / ☀️</div>
-  <div class="emoji-rain" id="emojiRain"></div>  <div class="container">
-    <div class="welcome">Selamat datang di cek khodam <strong>Kemodz</strong></div>
-    <h1>Cek Khodam Kartun Gokil</h1>
-    <input type="text" id="nameInput" placeholder="Masukkan nama kamu" />
-    <button onclick="cekKhodam()">Cek Khodam</button>
-    <button onclick="toggleKhodamList()">Lihat Daftar Khodam</button>
-    <div id="resultBox">
-      <div class="card-wrapper">
-        <div class="card" id="card">
-          <div class="card-face card-front">
-            <h2 id="khodamName">Khodam</h2>
-          </div>
-          <div class="card-face card-back">
-            <p id="khodamDesc"></p>
-            <p><em id="pesanHarian"></em></p>
-          </div>
-        </div>
-      </div>
+
+<!-- INTRO SCREEN -->
+<div id="intro-screen">
+  <h1>Welcome to SYNA WORLD ROLEPLAY</h1>
+  <button onclick="enterSite()">Go In</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content" class="hidden">
+
+  <header>
+    <div>
+      <h1>SYNA WORLD ROLEPLAY</h1>
+      <p>Bangun kisahmu di dunia baru. Bergabunglah dan bentuk masa depanmu di SYNA.</p>
     </div>
-    <div id="khodamListBox">
-      <button onclick="toggleKhodamList()">Tutup List</button>
-      <ul id="khodamList"></ul>
+  </header>
+
+  <section>
+    <h2>🌍 Tentang Server</h2>
+    <div class="card">
+      <p><strong>SYNA WORLD ROLEPLAY</strong> adalah dunia masa depan tempat kamu bisa menjadi siapa saja. Dengan fitur modern dan atmosfer futuristik, SYNA hadir sebagai server SA-MP RP yang beda dari yang lain. Kami fokus pada pengalaman realistis dan komunitas yang solid.</p>
     </div>
-    <div id="leaderboard"></div>
-  </div>  <script>
-    const khodams = [
-      { name: "Upin Lagi Pup", desc: "Khodam yang muncul saat darurat.", rarity: 90 },
-      { name: "FahmiKasep", desc: "Langka banget, hanya 1% yang dapet.", rarity: 1 },
-      { name: "Spongebob Nyasar", desc: "Khodam licin tapi setia.", rarity: 40 },
-      { name: "Dora Ngeblank", desc: "Khodam suka lupa arah pulang.", rarity: 60 },
-      { name: "Patrick Sering Bengong", desc: "Bikin ketawa tapi bingung.", rarity: 70 },
-      { name: "Shinchan Ngegas", desc: "Suka muncul pas kamu panik.", rarity: 30 },
-      { name: "Tayo Ngebut", desc: "Khodam tercepat di Kemodz.", rarity: 20 },
-      { name: "Nobita Gagal Fokus", desc: "Sering salah teleport.", rarity: 65 },
-      { name: "Doraemon Kehabisan Gadget", desc: "Khodam low battery.", rarity: 50 },
-      { name: "Sasuke Tersesat", desc: "Baperan tapi kuat.", rarity: 45 },
-      { name: "Naruto Nyasar", desc: "Ninja ceroboh tapi keren.", rarity: 35 },
-      { name: "Mickey Ngopi", desc: "Khodam santai tapi berkelas.", rarity: 55 },
-      { name: "Donald Duck Ngambek", desc: "Bersuara aneh tapi peduli.", rarity: 60 },
-      { name: "Pikachu Kesetrum Sendiri", desc: "Lucu tapi ceroboh.", rarity: 40 },
-      { name: "Tom Ketiban Panci", desc: "Selalu apes tapi setia.", rarity: 50 },
-      { name: "Jerry Tukang Nyolong", desc: "Licik tapi lucu.", rarity: 45 },
-      { name: "Minion Salah Bahasa", desc: "Khodam multibahasa ngawur.", rarity: 55 },
-      { name: "Gru Ketinggalan Anak", desc: "Pemimpin pelupa.", rarity: 60 },
-      { name: "Mr. Bean Diam-Diam Sakti", desc: "Gak banyak omong tapi ampuh.", rarity: 30 },
-      { name: "Khodam Meme Lord", desc: "Bisa muncul di semua grup WA.", rarity: 25 }
-    ];
 
-    const pesanHarianList = [
-      "Hari ini kamu butuh cemilan.",
-      "Jangan lupa minum es teh.",
-      "Khodammu menyarankan tidur siang.",
-      "Waktunya rebahan.",
-      "Jangan terlalu serius, bro!"
-    ];
+    <h2>📦 Starterpack Warga Baru</h2>
+    <div class="card">
+      <ul>
+        <li>✅ Level 1 langsung</li>
+        <li>💰 Uang awal sebesar 10 juta</li>
+        <li>🎁 Giveaway 1x setiap minggu untuk semua warga</li>
+      </ul>
+    </div>
 
-    const leaderboardData = JSON.parse(localStorage.getItem("leaderboard_khodam") || '{}');
+    <h2>🎉 Admin Aktif & Event</h2>
+    <div class="card">
+      <p>Admin SYNA aktif setiap hari dan rutin mengadakan <strong>event menarik</strong> agar warga tidak bosan! Mulai dari balapan, lomba memancing, capture zone, hingga event kejutan mendadak!</p>
+    </div>
 
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
+    <h2>🫂 Komunitas yang Erat</h2>
+    <div class="card">
+      <p><em>“Di SYNA, lu bukan sekadar player. Lu bagian dari keluarga.”</em></p>
+      <ul>
+        <li>🤝 Bangun geng dan organisasi sendiri</li>
+        <li>🏪 Buka usaha seperti warung, bengkel, bar, klub malam</li>
+        <li>💼 Bikin bisnis dan jadi pengusaha sukses di RP</li>
+        <li>🎭 Ikut drama RP & kolaborasi antar warga</li>
+      </ul>
+    </div>
 
-    function cekKhodam() {
-      const nama = document.getElementById('nameInput').value.trim().toLowerCase();
-      if (!nama) return alert("Masukkan nama dulu bro!");
-      const hash = Array.from(nama).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-      const khodam = khodams[hash % khodams.length];
+    <h2>⚙️ Fitur Unggulan</h2>
+    <div class="features">
+      <div>🛠️ Modshop</div>
+      <div>🎙️ Accent (Logat Karakter)</div>
+      <div>🔧 Workshop (Perbaiki kendaraan)</div>
+      <div>🏦 Rob Bank</div>
+      <div>🍜 Rob Warung</div>
+      <div>🚫 Anti Mixing</div>
+      <div>🚫 Anti Toxic</div>
+      <div>📲 WhatsApp Whitelist</div>
+      <div>💬 Sistem Emosi Karakter</div>
+      <div>🎡 Zona Karnaval Interaktif</div>
+    </div>
 
-      document.getElementById('khodamName').textContent = khodam.name;
-      document.getElementById('khodamDesc').textContent = khodam.desc;
-      document.getElementById('pesanHarian').textContent = pesanHarianList[hash % pesanHarianList.length];
-      document.getElementById('resultBox').style.display = 'block';
+    <h2>🗻 Gunung SYNA – Lebih Kejam dari Mount Chiliad!</h2>
+    <div class="card">
+      <p>Di <strong>SYNA WORLD</strong>, hadir lokasi ekstrem terbaru: <strong>Gunung SYNA</strong>. Medannya terjal, jalurnya berbahaya, dan cuacanya brutal. Katanya sih lebih kejam dari Mount Chiliad. Cuma petualang sejati yang bisa bertahan sampai puncak. Berani coba?</p>
+    </div>
 
-      const card = document.getElementById('card');
-      card.classList.remove('show');
-      setTimeout(() => card.classList.add('show'), 50);
+    <h2>📜 Asal Usul SYNA</h2>
+    <div class="card">
+      <p>SYNA lahir dari ide gila anak-anak komunitas yang ingin menciptakan dunia baru di SA-MP. Dimulai dari server kecil, SYNA berkembang jadi dunia futuristik yang imersif, kreatif, dan open roleplay yang solid.</p>
+    </div>
 
-      if (khodam.rarity <= 5) {
-        launchConfetti();
-      }
+    <h2>🧠 Kata Inspirasi</h2>
+    <div class="card">
+      <p><em>“Dalam dunia yang kacau, SYNA hadir sebagai rumah kedua bagi jiwa-jiwa yang ingin hidup baru.”</em></p>
+    </div>
 
-      leaderboardData[nama] = khodam.name;
-      localStorage.setItem("leaderboard_khodam", JSON.stringify(leaderboardData));
-      renderLeaderboard();
-    }
+    <h2>👑 Jajaran Staf</h2>
+    <div class="staff">
+      <div><strong>Developer:</strong><br> SYNA | CANO</div>
+      <div><strong>Administrator:</strong><br> SYNA | CANO | RYAN | ZENN | BIMA | BRATVA | JYRELL | LAZER | SHOOPE | TRAYVONE | ORCA | GERADLO | MORGAN</div>
+    </div>
+    </div>
 
-    function launchConfetti() {
-      for (let i = 0; i < 30; i++) {
-        const emoji = document.createElement('div');
-        emoji.className = 'emoji';
-        emoji.style.left = Math.random() * 100 + 'vw';
-        emoji.style.top = '-30px';
-        emoji.textContent = ['💥','✨','',''][Math.floor(Math.random()*4)] || '✨';
-        document.getElementById('emojiRain').appendChild(emoji);
-        setTimeout(() => emoji.remove(), 4000);
-      }
-    }
+    <h2>🎮 Apa Itu Roleplay SA-MP?</h2>
+    <div class="card">
+      <p>Roleplay SA-MP adalah memainkan peran sebagai karakter seolah kamu hidup di dunia nyata. Setiap tindakan punya konsekuensi. Kamu bisa jadi polisi, kriminal, mekanik, atau warga biasa. Di SYNA, kami membuat semuanya lebih realistis, interaktif, dan menyenangkan.</p>
+    </div>
 
-    function toggleKhodamList() {
-      const box = document.getElementById('khodamListBox');
-      const ul = document.getElementById('khodamList');
-      if (box.style.display === 'none' || box.style.display === '') {
-        ul.innerHTML = khodams.map(k => `<li><strong>${k.name}</strong>: ${k.desc}</li>`).join('');
-        box.style.display = 'block';
-      } else {
-        box.style.display = 'none';
-      }
-    }
+    <h2>📲 Gabung Sekarang via WhatsApp</h2>
+    <div class="card" style="text-align: center;">
+      <p>SYNA adalah rumah baru untuk petualanganmu. Yuk, gabung sekarang!</p>
+      <a href="https://chat.whatsapp.com/GP1Z2gglSlKCQyTdVTnq4A" target="_blank" class="button-wa">📲 Gabung WhatsApp Sekarang</a>
+    </div>
+   <h2>🥷 Gabung Sekarang Ke WhatsApp FnG SWRP</h2>
+    <div class="card" style="text-align: center;">
+      <p>FnG Adalah Comun Tempat Family Dan Badside!</p>
+      <a href="https://chat.whatsapp.com/EPFKXRUzzggJZGnI5rBUcm?mode=r_c" target="_blank" class="button-wa">🥷Gabung FnG Sekarang</a>
+    </div>
+  </section>
 
-    function renderLeaderboard() {
-      const lb = document.getElementById("leaderboard");
-      const entries = Object.entries(leaderboardData);
-      if (!entries.length) return;
-      lb.innerHTML = `<h3>Kompetisi Khodam</h3><ul>${entries.map(([nama, khodam]) => `<li><strong>${nama}</strong>: ${khodam}</li>`).join('')}</ul>`;
-    }
+  <footer>
+    &copy; 2025 SYNA WORLD ROLEPLAY | Dunia Ini Milikmu 🌐
+  </footer>
 
-    renderLeaderboard();
-  </script></body>
+</div>
+
+<script>
+  function enterSite() {
+    document.getElementById("intro-screen").style.display = "none";
+    document.getElementById("main-content").classList.remove("hidden");
+  }
+</script>
+
+</body>
 </html>
