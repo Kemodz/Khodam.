@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SYNA WORLD ROLEPLAY</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #001d3d, #003566);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
+    #intro-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100vh;
+      background: radial-gradient(circle at center, #001d3d 30%, #000814 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #intro-screen h1 {
+      font-size: 3.5em;
+      margin-bottom: 25px;
+      text-align: center;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #intro-screen button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #25D366;
+      transition: all 0.3s ease;
+    }
+
+    #intro-screen button:hover {
+      background: #1ebc5c;
+      box-shadow: 0 0 25px #1ebc5c;
+    }
+
+    .hidden { display: none; }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1589820296151-245e1c94b394?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    header h1 {
+      font-size: 4em;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #00c9ff;
+    }
+
+    header p {
+      font-size: 1.3em;
+      max-width: 600px;
+      margin: 20px auto;
+      color: #cceeff;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2em;
+      border-left: 5px solid #00c9ff;
+      padding-left: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #002855;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0, 201, 255, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #001524;
+      color: #777;
+    }
+
+    .staff {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .staff div {
+      background: #013a63;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+    }
+
+    a.button-wa {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px #25D366;
+      transition: 0.3s ease;
+    }
+
+    a.button-wa:hover {
+      background: #1ebc5c;
+      box-shadow: 0 0 20px #1ebc5c;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .features div {
+      background: #01497c;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 153, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+<!-- INTRO SCREEN -->
+<div id="intro-screen">
+  <h1>Welcome to SYNA WORLD ROLEPLAY</h1>
+  <button onclick="enterSite()">Go In</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main-content" class="hidden">
+
+  <header>
+    <div>
+      <h1>SYNA WORLD ROLEPLAY</h1>
+      <p>Bangun kisahmu di dunia baru. Bergabunglah dan bentuk masa depanmu di SYNA.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>🌍 Tentang Server</h2>
+    <div class="card">
+      <p><strong>SYNA WORLD ROLEPLAY</strong> adalah dunia masa depan tempat kamu bisa menjadi siapa saja. Dengan fitur modern dan atmosfer futuristik, SYNA hadir sebagai server SA-MP RP yang beda dari yang lain. Kami fokus pada pengalaman realistis dan komunitas yang solid.</p>
+    </div>
+
+    <h2>📦 Starterpack Warga Baru</h2>
+    <div class="card">
+      <ul>
+        <li>✅ Level 1 langsung</li>
+        <li>💰 Uang awal sebesar 10 juta</li>
+        <li>🎁 Giveaway 1x setiap minggu untuk semua warga</li>
+      </ul>
+    </div>
+
+    <h2>🎉 Admin Aktif & Event</h2>
+    <div class="card">
+      <p>Admin SYNA aktif setiap hari dan rutin mengadakan <strong>event menarik</strong> agar warga tidak bosan! Mulai dari balapan, lomba memancing, capture zone, hingga event kejutan mendadak!</p>
+    </div>
+
+    <h2>🫂 Komunitas yang Erat</h2>
+    <div class="card">
+      <p><em>“Di SYNA, lu bukan sekadar player. Lu bagian dari keluarga.”</em></p>
+      <ul>
+        <li>🤝 Bangun geng dan organisasi sendiri</li>
+        <li>🏪 Buka usaha seperti warung, bengkel, bar, klub malam</li>
+        <li>💼 Bikin bisnis dan jadi pengusaha sukses di RP</li>
+        <li>🎭 Ikut drama RP & kolaborasi antar warga</li>
+      </ul>
+    </div>
+
+    <h2>⚙️ Fitur Unggulan</h2>
+    <div class="features">
+      <div>🛠️ Modshop</div>
+      <div>🎙️ Accent (Logat Karakter)</div>
+      <div>🔧 Workshop (Perbaiki kendaraan)</div>
+      <div>🏦 Rob Bank</div>
+      <div>🍜 Rob Warung</div>
+      <div>🚫 Anti Mixing</div>
+      <div>🚫 Anti Toxic</div>
+      <div>📲 WhatsApp Whitelist</div>
+      <div>💬 Sistem Emosi Karakter</div>
+      <div>🎡 Zona Karnaval Interaktif</div>
+    </div>
+
+    <h2>🗻 Gunung SYNA – Lebih Kejam dari Mount Chiliad!</h2>
+    <div class="card">
+      <p>Di <strong>SYNA WORLD</strong>, hadir lokasi ekstrem terbaru: <strong>Gunung SYNA</strong>. Medannya terjal, jalurnya berbahaya, dan cuacanya brutal. Katanya sih lebih kejam dari Mount Chiliad. Cuma petualang sejati yang bisa bertahan sampai puncak. Berani coba?</p>
+    </div>
+
+    <h2>📜 Asal Usul SYNA</h2>
+    <div class="card">
+      <p>SYNA lahir dari ide gila anak-anak komunitas yang ingin menciptakan dunia baru di SA-MP. Dimulai dari server kecil, SYNA berkembang jadi dunia futuristik yang imersif, kreatif, dan open roleplay yang solid.</p>
+    </div>
+
+    <h2>🧠 Kata Inspirasi</h2>
+    <div class="card">
+      <p><em>“Dalam dunia yang kacau, SYNA hadir sebagai rumah kedua bagi jiwa-jiwa yang ingin hidup baru.”</em></p>
+    </div>
+
+    <h2>👑 Jajaran Staf</h2>
+    <div class="staff">
+      <div><strong>Developer:</strong><br> SYNA | CANO</div>
+      <div><strong>Administrator:</strong><br> SYNA | CANO | RYAN | ZENN | BIMA | BRATVA | JYRELL | LAZER | SHOOPE | TRAYVONE | ORCA | GERADLO | MORGAN</div>
+    </div>
+    </div>
+
+    <h2>🎮 Apa Itu Roleplay SA-MP?</h2>
+    <div class="card">
+      <p>Roleplay SA-MP adalah memainkan peran sebagai karakter seolah kamu hidup di dunia nyata. Setiap tindakan punya konsekuensi. Kamu bisa jadi polisi, kriminal, mekanik, atau warga biasa. Di SYNA, kami membuat semuanya lebih realistis, interaktif, dan menyenangkan.</p>
+    </div>
+
+    <h2>📲 Gabung Sekarang via WhatsApp</h2>
+    <div class="card" style="text-align: center;">
+      <p>SYNA adalah rumah baru untuk petualanganmu. Yuk, gabung sekarang!</p>
+      <a href="https://chat.whatsapp.com/GP1Z2gglSlKCQyTdVTnq4A" target="_blank" class="button-wa">📲 Gabung WhatsApp Sekarang</a>
+    </div>
+   <h2>🥷 Gabung Sekarang Ke WhatsApp FnG SWRP</h2>
+    <div class="card" style="text-align: center;">
+      <p>FnG Adalah Comun Tempat Family Dan Badside!</p>
+      <a href="https://chat.whatsapp.com/EPFKXRUzzggJZGnI5rBUcm?mode=r_c" target="_blank" class="button-wa">🥷Gabung FnG Sekarang</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 SYNA WORLD ROLEPLAY | Dunia Ini Milikmu 🌐
+  </footer>
+
+</div>
+
+<script>
+  function enterSite() {
+    document.getElementById("intro-screen").style.display = "none";
+    document.getElementById("main-content").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
