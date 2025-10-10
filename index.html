@@ -3,149 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Astri 💖</title>
+<title>🔥 Jasa Sewa WA - DekenWa</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-  height:100vh;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;text-align:center;
-}
-#main{position:absolute;width:100%;height:100%;top:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-h1{font-family:'Pacifico',cursive;font-size:2.5rem;margin-bottom:20px;animation:glow 2s infinite alternate;}
-@keyframes glow{from{text-shadow:0 0 10px #fff,0 0 20px #ff6f91;}to{text-shadow:0 0 20px #fff,0 0 40px #ff6f91;}}
-.foto{width:180px;height:180px;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 0 40px rgba(255,255,255,0.8);margin:20px;animation:pulse 2s infinite;}
-@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
-#gombal{font-size:1.3rem;line-height:1.6;min-height:60px;padding:0 10px;}
-.cursor{display:inline-block;width:3px;background:#fff;animation:blink 1s infinite;vertical-align:middle;}
-@keyframes blink{50%{background:transparent;}}
-button{background:#ff4f81;color:#fff;border:none;padding:10px 20px;border-radius:30px;margin-top:15px;font-size:1rem;cursor:pointer;transition:.3s}
-button:hover{background:#ff7fa1;transform:scale(1.05);}
-/* hearts */
-.heart{position:absolute;width:20px;height:20px;background:#ff4f81;transform:rotate(45deg);animation:float 7s linear infinite;opacity:.8;}
-.heart::before,.heart::after{content:'';position:absolute;width:20px;height:20px;background:#ff4f81;border-radius:50%;}
-.heart::before{top:-10px;left:0;}
-.heart::after{left:-10px;top:0;}
-@keyframes float{0%{transform:translateY(100vh) rotate(45deg);}100%{transform:translateY(-110vh) rotate(45deg);}}
-/* confetti */
-.confetti{position:absolute;width:10px;height:10px;background:red;top:0;opacity:.8;animation:jatuh 4s linear forwards;}
-@keyframes jatuh{to{transform:translateY(100vh) rotate(720deg);opacity:0;}}
-/* love big surprise */
-.love-explode{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:5rem;animation:boom 1s forwards;z-index:100;}
-@keyframes boom{0%{transform:translate(-50%,-50%) scale(0);}60%{transform:translate(-50%,-50%) scale(1.6);}100%{transform:translate(-50%,-50%) scale(1);}}
-/* pelukan layar penuh */
-#peluk{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,79,129,0.95);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;font-family:'Pacifico',cursive;font-size:2rem;z-index:200;opacity:0;pointer-events:none;transition:all 0.8s;}
-#peluk img{width:150px;height:150px;object-fit:cover;border-radius:50%;border:6px solid #fff;margin-bottom:20px;}
+  :root{
+    --green:#16a34a;
+    --dark:#052e16;
+    --gold:#facc15;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
+  html{scroll-behavior:smooth;}
+  body{
+    background:linear-gradient(180deg,#052e16 0%,#064e3b 50%,#052e16 100%);
+    color:#fff;
+    overflow-x:hidden;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 25px;
+    background:rgba(0,0,0,0.35);
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(8px);
+  }
+  header h1{font-family:'Archivo Black';font-size:20px;color:var(--gold)}
+  nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    transition:.3s;
+  }
+  nav a:hover{color:var(--gold)}
+  section{padding:60px 20px;text-align:center;}
+  .hero{
+    background:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1600') center/cover no-repeat;
+    position:relative;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:rgba(0,0,0,0.6);
+  }
+  .hero-content{position:relative;z-index:1;max-width:600px;margin:auto;}
+  h2{font-family:'Archivo Black';color:var(--gold);margin-bottom:15px;}
+  .price-card{
+    background:rgba(0,0,0,0.6);
+    display:inline-block;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+    text-align:left;
+    margin-top:20px;
+  }
+  .price-card div{margin:5px 0;font-weight:700}
+  button{
+    background:linear-gradient(90deg,var(--gold),#fef08a);
+    border:none;padding:12px 20px;border-radius:10px;
+    color:#000;font-weight:900;cursor:pointer;
+    margin-top:15px;
+    box-shadow:0 0 20px rgba(250,204,21,0.3);
+  }
+  button:hover{transform:scale(1.05)}
+  form{
+    background:rgba(0,0,0,0.5);
+    max-width:450px;margin:auto;
+    padding:25px;border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  input,select,textarea{
+    width:100%;
+    padding:12px;margin-top:10px;
+    border-radius:10px;border:none;
+    outline:none;
+    font-weight:600;
+  }
+  textarea{resize:none;}
+  #rules-list{
+    background:rgba(0,0,0,0.6);
+    display:inline-block;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.1);
+    text-align:left;
+    font-weight:700;
+    line-height:1.7;
+  }
+  footer{text-align:center;padding:25px 10px;color:rgba(255,255,255,0.6);font-size:13px;}
+
+  /* floating money */
+  .money{position:fixed;width:64px;height:32px;opacity:.8;pointer-events:none;z-index:0;}
+  @keyframes floatUp{
+    0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+    10%{opacity:1;}
+    100%{transform:translateY(-20vh) rotate(360deg);opacity:0;}
+  }
+  @media(max-width:600px){
+    header h1{font-size:16px}
+    nav a{margin-left:10px;font-size:13px}
+  }
 </style>
 </head>
 <body>
-<div id="main">
-  <h1 id="judul"></h1>
-  <img src="" id="fotoView" class="foto">
-  <p id="gombal"></p><span class="cursor"></span>
-  <button onclick="peluk()">🤗 Peluk Aku</button>
-</div>
 
-<div id="peluk">
-  <img id="fotoPeluk" src="">
-  <p id="teksPeluk">Aku sayang kamu selamanya! 💖</p>
-</div>
+<header>
+  <h1>🔥 DekenWa</h1>
+  <nav>
+    <a href="#harga">Harga</a>
+    <a href="#form">Sewa Sekarang</a>
+    <a href="#rules">Rules</a>
+  </nav>
+</header>
 
-<audio id="musik" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" loop></audio>
-<audio id="pop" src="https://www.myinstants.com/media/sounds/pop.mp3"></audio>
+<section class="hero" id="harga">
+  <div class="hero-content">
+    <h2>💸 JASA SEWA WA CEPAT & AMAN!</h2>
+    <p>Sewakan WA-mu dengan harga terjangkau, proses cepat & aman 100%.</p>
+    <div class="price-card">
+      <div>10 Menit = 10K</div>
+      <div>30 Menit = 25K</div>
+      <div>1 Jam = 35K</div>
+      <div>WA Badak (3 Jam) = 100K</div>
+      <hr style="margin:10px 0;border:none;border-top:1px solid rgba(255,255,255,0.2)">
+      <div>💣 KENA BAN = DIBAYAR 150P/CHAT</div>
+    </div>
+    <br>
+    <button onclick="document.querySelector('#form').scrollIntoView({behavior:'smooth'})">💬 Sewa Sekarang</button>
+  </div>
+</section>
+
+<section id="form">
+  <h2>📱 Form Sewa</h2>
+  <p>Isi nomor WA dan durasi sewa, langsung kirim ke admin.</p>
+  <form onsubmit="sendToAdmin(event)">
+    <label>Nomor WA kamu:</label>
+    <input type="tel" id="nomor" placeholder="contoh: 081234567890" required>
+    <label>Pilih Paket:</label>
+    <select id="paket" required>
+      <option value="">-- Pilih Paket --</option>
+      <option value="10 menit">10 Menit - 10K</option>
+      <option value="30 menit">30 Menit - 25K</option>
+      <option value="1 jam">1 Jam - 35K</option>
+      <option value="3 jam (WA Badak)">3 Jam (WA Badak) - 100K</option>
+    </select>
+    <label>Catatan (opsional):</label>
+    <textarea id="note" rows="2" placeholder="Tambahan info..."></textarea>
+    <button type="submit">Kirim ke Admin via WhatsApp</button>
+  </form>
+</section>
+
+<section id="rules">
+  <h2>⚖️ RULES / PERATURAN</h2>
+  <div id="rules-list">
+    <p>1️⃣ TIDAK BOLEH HAPUS CHAT SELAMA SEWA</p>
+    <p>2️⃣ JIKA WA TERKENA BAN, CHAT NO ADMIN DENGAN NO LAIN UNTUK MINTA TEXT UNBAN</p>
+    <p>3️⃣ DAN JIKA TERKENA BAN ADMIN AKAN BAYAR 150PERAK/CHAT</p>
+  </div>
+</section>
+
+<footer>© 2025 DekenWa — Jasa Sewa WA Murah & Aman</footer>
+
+<!-- floating money -->
+<svg class="money" style="left:10%;animation:floatUp 12s linear infinite;animation-delay:0s" viewBox="0 0 64 32"><rect width="64" height="32" rx="5" fill="#16a34a"/><text x="50%" y="60%" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Rp</text></svg>
+<svg class="money" style="left:40%;animation:floatUp 15s linear infinite;animation-delay:3s" viewBox="0 0 64 32"><rect width="64" height="32" rx="5" fill="#22c55e"/><text x="50%" y="60%" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Rp</text></svg>
+<svg class="money" style="left:70%;animation:floatUp 13s linear infinite;animation-delay:1s" viewBox="0 0 64 32"><rect width="64" height="32" rx="5" fill="#059669"/><text x="50%" y="60%" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">Rp</text></svg>
 
 <script>
-// Nama & foto langsung otomatis
-const namaPasangan = "Astri 🌸";
-const fotoPasangan = "https://cdn.discordapp.com/attachments/1290285205655126036/1400329958471110838/IMG-20250421-WA0429.jpg?ex=688c3e66&is=688aece6&hm=7a29bd7ffe1f71bc3d024c422d2056e2f822eef22ee5e34a872ff88ef67b0eeb&";
-
-// Array gombalan
-const gombalan=[
- "Astri bikin dunia ini lebih indah setiap hari 🌈",
- "Aku selalu bersyukur karena kamu ada di hidupku 🙏",
- "Aku nggak mau apa-apa... cuma mau kamu bahagia 💕",
- "Setiap detik sama kamu adalah hadiah terindah 🎁",
- "Aku janji nggak ada hari tanpa aku sayang kamu ✨",
- "Kamu itu rumahku... tempatku kembali 🏡"
-];
-
-let index=0;
-const teks=document.getElementById("gombal");
-const cursor=document.querySelector(".cursor");
-const judul=document.getElementById("judul");
-const fotoView=document.getElementById("fotoView");
-const fotoPeluk=document.getElementById("fotoPeluk");
-
-function ketikTeks(teksGombal){
- let i=0;teks.innerHTML="";cursor.style.display="inline-block";
- const interval=setInterval(()=>{
-   teks.innerHTML+=teksGombal[i];
-   i++;
-   if(i>=teksGombal.length){clearInterval(interval);cursor.style.display="none";}
- },50);
-}
-
-function gombalOtomatis(){
- ketikTeks(gombalan[index]);
- index=(index+1)%gombalan.length;
- setTimeout(gombalOtomatis,5000);
-}
-
-function buatHeart(){
- const heart=document.createElement("div");
- heart.classList.add("heart");
- heart.style.left=Math.random()*window.innerWidth+"px";
- heart.style.animationDuration=(5+Math.random()*3)+"s";
- document.body.appendChild(heart);
- setTimeout(()=>heart.remove(),8000);
-}
-
-function tambahConfetti(){
- for(let i=0;i<25;i++){
-   const conf=document.createElement("div");
-   conf.classList.add("confetti");
-   conf.style.left=Math.random()*window.innerWidth+"px";
-   conf.style.background=`hsl(${Math.random()*360},70%,60%)`;
-   conf.style.animationDuration=(2+Math.random()*2)+"s";
-   document.body.appendChild(conf);
-   setTimeout(()=>conf.remove(),4000);
- }
-}
-
-function bigLove(){
- const love=document.createElement("div");
- love.classList.add("love-explode");
- love.innerHTML="💞";
- document.body.appendChild(love);
- document.getElementById("pop").play();
- setTimeout(()=>love.remove(),2000);
-}
-
-function peluk(){
- const pelukDiv=document.getElementById("peluk");
- pelukDiv.style.opacity="1";
- pelukDiv.style.pointerEvents="all";
- document.getElementById("teksPeluk").innerText=`${namaPasangan}, aku peluk kamu erat-erat! 🤗💖`;
- setTimeout(()=>{
-   pelukDiv.style.opacity="0";
-   pelukDiv.style.pointerEvents="none";
- },4000);
-}
-
-// Jalankan otomatis saat buka halaman
-window.onload = ()=>{
- judul.innerHTML=`💖 Selamat Hari Girlfriend Day, ${namaPasangan}! 💖`;
- fotoView.src = fotoPasangan;
- fotoPeluk.src = fotoPasangan;
- document.getElementById("musik").play();
- gombalOtomatis();
- setInterval(buatHeart,200);
- setInterval(tambahConfetti,3000);
- setInterval(bigLove,8000);
+const ADMIN_NUMBER = "6283116892098";
+function sendToAdmin(e){
+  e.preventDefault();
+  const nomor = document.getElementById("nomor").value.trim();
+  const paket = document.getElementById("paket").value.trim();
+  const note = document.getElementById("note").value.trim();
+  if(!nomor||!paket){alert("Isi nomor dan pilih paket dulu bro!");return;}
+  let pesan = `No Bro gua mau sewain wa gua yg ${paket}\nNomor: ${nomor}`;
+  if(note) pesan += `\nCatatan: ${note}`;
+  const encoded = encodeURIComponent(pesan);
+  const url = `https://wa.me/${ADMIN_NUMBER}?text=${encoded}`;
+  window.open(url,'_blank');
 }
 </script>
+
 </body>
 </html>
