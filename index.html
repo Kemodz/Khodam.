@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace Gmail Pro</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(135deg,#0f172a,#1e3a8a,#3b82f6);
+  color:white;
+}
+
+header {
+  text-align:center;
+  padding:20px;
+  font-size:22px;
+  font-weight:600;
+}
+
+.testi-btn {
+  margin-top:10px;
+  padding:8px 14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.container {
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+}
+
+.card {
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 0 25px rgba(59,130,246,0.3);
+}
+
+input, textarea, select {
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  margin-top:10px;
+  background:rgba(255,255,255,0.1);
+  color:white;
+}
+
+textarea { min-height:140px; }
+
+.info-box {
+  background:rgba(59,130,246,0.2);
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
+  font-size:13px;
+}
+
+.btn {
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.counter {
+  font-size:12px;
+  margin-top:5px;
+}
+
+.valid { border:2px solid #22c55e; }
+.invalid { border:2px solid #ef4444; }
+
+.highlight-box {
+  margin-top:10px;
+  font-size:12px;
+  background:rgba(0,0,0,0.4);
+  padding:10px;
+  border-radius:10px;
+  max-height:120px;
+  overflow:auto;
+}
+
+.good { color:#22c55e; }
+.bad { color:#ef4444; }
+
+.toast {
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#0f172a;
+  padding:12px 18px;
+  border-radius:10px;
+  opacity:0;
+  transition:0.3s;
+}
+.toast.show { opacity:1; }
+</style>
+</head>
+
+<body>
+
+<header>
+  ⚡ Gmail Marketplace Pro
+  <br>
+  <button class="testi-btn" onclick="openTesti()">📢 Lihat Testimoni</button>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<div class="info-box">
+📜 Ketentuan:<br>
+Password wajib: <b>aass1122</b><br>
+Tahun lahir: 1999<br>
+Gender: Tidak ingin memberitahu<br><br>
+
+⚠ Aturan Penulisan Nama:<br>
+Huruf tidak boleh berderetan secara berlebihan (angkasaa ❌)<br>
+Jumlah angka maksimal 3 (angkasa3434 ❌)
+</div>
+
+<input id="nama" placeholder="Nama">
+<input id="wa" placeholder="No WhatsApp">
+<input type="number" id="jumlah" placeholder="Jumlah Email" oninput="updateRate()">
+
+<div class="info-box" id="rateBox">Rate: -</div>
+
+<textarea id="listemail" placeholder="Paste semua email, jangan ketik 1 1 (1 email per baris)" oninput="countEmails()"></textarea>
+
+<div class="counter" id="emailCount">0 email</div>
+<div class="highlight-box" id="preview"></div>
+
+<select id="ewalletType">
+<option>DANA</option>
+</select>
+
+<input id="ewallet" placeholder="No E-Wallet">
+<input id="an" placeholder="Atas Nama">
+
+<button class="btn" onclick="kirimWA()">⚡ JUAL SEKARANG</button>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function openTesti(){
+  window.open("https://whatsapp.com/channel/0029Vb7QbJtFnSz7BoajF927");
+}
+
+function toast(msg){
+  let t=toastEl;
+  t.innerText=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+function validNama(n){
+  if(/(.)\1{2,}/.test(n)) return false;
+  return (n.replace(/[^0-9]/g,'').length <= 3);
+}
+
+function validWA(w){
+  return /^08[0-9]{8,13}$/.test(w);
+}
+
+function updateRate(){
+  let j = parseInt(jumlahEl.value);
+  if(!j){rateBox.innerText='Rate: -';return;}
+
+  let total = 0;
+
+  if(j <= 10){
+    total = j * 2000;
+    rateBox.innerText = `Rate: 2K | Total: Rp${total.toLocaleString()}`;
+  } else {
+    let awal = 10 * 2000;
+    let sisa = (j - 10) * 3000;
+    total = awal + sisa;
+
+    rateBox.innerText = `10 pertama: 2K | sisanya: 3K\nTotal: Rp${total.toLocaleString()}`;
+  }
+}
+
+function countEmails(){
+  let emails=listEl.value.split(/\r?\n/).map(x=>x.trim()).filter(x=>x);
+  let unique=[...new Set(emails)];
+
+  let valid=0, invalid=0, html="";
+
+  unique.forEach((e,i)=>{
+    if(/^[^\s@]+@gmail\.com$/.test(e)){
+      valid++;
+      html+=`<div class="good">${i+1}. ${e}</div>`;
+    } else {
+      invalid++;
+      html+=`<div class="bad">${i+1}. ${e}</div>`;
+    }
+  });
+
+  preview.innerHTML=html;
+  emailCount.innerText=`${unique.length} email | ✅ ${valid} valid | ❌ ${invalid} error`;
+
+  listEl.value=unique.join("\n");
+
+  listEl.classList.toggle('valid', invalid===0 && unique.length>0);
+  listEl.classList.toggle('invalid', invalid>0);
+}
+
+function kirimWA(){
+  let nama=namaEl.value;
+  let wa=waEl.value;
+  let jumlah=parseInt(jumlahEl.value);
+  let ewalletType=document.getElementById('ewalletType').value;
+  let ewallet=ewalletEl.value;
+  let an=anEl.value;
+
+  let emails=listEl.value.split(/\r?\n/).map(e=>e.trim()).filter(e=>e);
+
+  if(!nama||!wa||!jumlah||!ewallet||!an){
+    toast('Lengkapi semua data');
+    return;
+  }
+
+  if(!validNama(nama)){
+    toast('Nama tidak valid');
+    return;
+  }
+
+  if(!validWA(wa)){
+    toast('WA tidak valid');
+    return;
+  }
+
+  if(emails.length!==jumlah){
+    toast('Jumlah email tidak sesuai');
+    return;
+  }
+
+  for(let e of emails){
+    if(!e.endsWith('@gmail.com')){
+      toast('Email harus gmail semua');
+      return;
+    }
+  }
+
+  let total = 0;
+
+  if(jumlah <= 10){
+    total = jumlah * 2000;
+  } else {
+    total = (10 * 2000) + ((jumlah - 10) * 3000);
+  }
+
+  let pesan=`ORDER GMAIL%0A%0A`
+  +`Nama: ${nama}%0A`
+  +`WA: ${wa}%0A`
+  +`Jumlah: ${jumlah}%0A`
+  +`Rate: 10 pertama 2K, selebihnya 3K%0A`
+  +`Total: Rp${total}%0A%0A`
+  +`Email:%0A${emails.join("%0A")}%0A%0A`
+  +`E-Wallet: ${ewalletType}%0A`
+  +`No: ${ewallet}%0A`
+  +`Atas Nama: ${an}`;
+
+  window.open(`https://wa.me/6281318108329?text=${pesan}`);
+}
+
+const namaEl=document.getElementById('nama');
+const waEl=document.getElementById('wa');
+const jumlahEl=document.getElementById('jumlah');
+const listEl=document.getElementById('listemail');
+const ewalletEl=document.getElementById('ewallet');
+const anEl=document.getElementById('an');
+const preview=document.getElementById('preview');
+const emailCount=document.getElementById('emailCount');
+const rateBox=document.getElementById('rateBox');
+const toastEl=document.getElementById('toast');
+</script>
+
+</body>
+</html>
