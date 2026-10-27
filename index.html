@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pasar Valas – Simulator Trading Forex</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#eef1f5;--pn:#fff;--ink:#14202e;--mu:#6a7889;--ln:#dce2ea;--buy:#2563eb;--sell:#e0492f;--hl:#eaf0f7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0d1823;--pn:#142331;--ink:#e6edf4;--mu:#8a9bad;--ln:#243546;--buy:#5b9bff;--sell:#ff7a63;--hl:#1b2f41}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0d1823;--pn:#142331;--ink:#e6edf4;--mu:#8a9bad;--ln:#243546;--buy:#5b9bff;--sell:#ff7a63;--hl:#1b2f41}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "IBM Plex Sans",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:12px 16px;background:var(--pn);border-bottom:1px solid var(--ln)}
+h1{font-size:18px;margin:0 12px 0 0;font-weight:600;letter-spacing:-.01em}
+.st{display:flex;flex-direction:column}.st small{color:var(--mu);font-size:12px}.st b{font-size:16px;font-weight:600}
+.app{display:grid;grid-template-columns:240px minmax(0,1fr) 290px;gap:12px;padding:12px;max-width:1480px;margin:auto}
+.pn{background:var(--pn);border:1px solid var(--ln);border-radius:6px;padding:12px}
+.pn h2{font-size:13px;margin:0 0 8px;font-weight:600;color:var(--mu)}
+.wl{display:flex;flex-direction:column;gap:2px}
+.wr{display:grid;grid-template-columns:1fr auto;gap:0 8px;padding:7px 8px;border-radius:4px;cursor:pointer;border:0;background:none;color:inherit;font:inherit;text-align:left;width:100%}
+.wr:hover,.wr.on{background:var(--hl)}.wr.on{box-shadow:inset 3px 0 0 var(--buy)}
+.wr small{color:var(--mu)}.up{color:var(--buy)}.dn{color:var(--sell)}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.bar h2{margin:0;font-size:18px;color:var(--ink)}
+.seg button{border:1px solid var(--ln);background:none;color:var(--ink);padding:4px 10px;font:inherit;cursor:pointer}
+.seg button:first-child{border-radius:4px 0 0 4px}.seg button:last-child{border-radius:0 4px 4px 0}
+.seg button.on{background:var(--ink);color:var(--pn);border-color:var(--ink)}
+#cv{width:100%;height:340px;display:block}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+label{display:block;font-size:12px;color:var(--mu);margin:8px 0 3px}
+input,select{width:100%;padding:7px 8px;border:1px solid var(--ln);border-radius:4px;background:var(--pn);color:var(--ink);font:inherit}
+input:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--buy);outline-offset:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.go{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.go button{border:0;border-radius:4px;padding:10px 6px;color:#fff;font:inherit;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.go small{font-weight:400;opacity:.9}
+.go .b{background:var(--buy)}.go .s{background:var(--sell)}
+.go button:active{transform:translateY(1px)}
+.info{font-size:12px;color:var(--mu);margin-top:10px;display:grid;gap:2px}.info b{color:var(--ink);font-weight:500}
+.box{margin-top:12px;padding-top:10px;border-top:1px solid var(--ln);font-size:12px}
+.link{background:none;border:0;color:var(--buy);cursor:pointer;font:inherit;padding:0;text-decoration:underline}
+.tabs{display:flex;gap:4px;margin-bottom:8px;align-items:center}
+.tabs button{border:0;background:none;color:var(--mu);font:inherit;font-weight:500;padding:5px 10px;cursor:pointer;border-radius:4px}
+.tabs button.on{background:var(--hl);color:var(--ink)}
+.tabs .sp{margin-left:auto}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
+th{font-weight:500;color:var(--mu);text-align:right;padding:5px 8px;border-bottom:1px solid var(--ln)}
+td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--ln)}
+th:first-child,td:first-child{text-align:left}
+.x{border:1px solid var(--ln);background:none;color:var(--ink);border-radius:4px;padding:2px 8px;cursor:pointer;font:inherit}
+.x:hover{background:var(--hl)}
+.empty{padding:22px 8px;color:var(--mu);text-align:center}
+footer{max-width:1480px;margin:0 auto;padding:4px 16px 20px;color:var(--mu);font-size:12px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--pn);padding:9px 14px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5;max-width:90vw}
+#toast.on{opacity:1}
+@media (max-width:1000px){.app{grid-template-columns:1fr}.wl{flex-direction:row;overflow-x:auto}.wr{min-width:140px}#cv{height:260px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pasar Valas</h1>
+  <div class="st"><small>Saldo</small><b id="aBal"></b></div>
+  <div class="st"><small>Ekuitas</small><b id="aEq"></b></div>
+  <div class="st"><small>Floating P&amp;L</small><b id="aFl"></b></div>
+  <div class="st"><small>Margin terpakai</small><b id="aM"></b></div>
+  <div class="st"><small>Margin bebas</small><b id="aFree"></b></div>
+  <div class="st"><small>Level margin</small><b id="aLvl"></b></div>
+  <div class="st" style="width:90px"><small>Leverage</small>
+    <select id="lev" aria-label="Leverage"><option value="50">1:50</option><option value="100">1:100</option><option value="200">1:200</option><option value="500">1:500</option></select></div>
+</header>
+
+<main class="app">
+  <aside class="pn"><h2>Pasangan mata uang</h2><div class="wl" id="wl"></div></aside>
+
+  <section class="col">
+    <div class="pn">
+      <div class="bar"><h2 id="cTitle"></h2>
+        <div class="seg" id="tfs" role="group" aria-label="Timeframe"><button data-tf="5">5 dtk</button><button data-tf="15" class="on">15 dtk</button><button data-tf="60">1 mnt</button></div></div>
+      <canvas id="cv" aria-label="Grafik candlestick"></canvas>
+    </div>
+    <div class="pn">
+      <div class="tabs"><button data-tab="pos" class="on">Posisi terbuka</button><button data-tab="his">Riwayat</button>
+        <button class="x sp" id="closeAll">Tutup semua</button><button class="x" id="reset">Reset akun</button></div>
+      <div class="tw" id="tbl"></div>
+    </div>
+  </section>
+
+  <aside class="pn">
+    <h2>Order baru</h2>
+    <div class="two"><div><label for="lot">Lot</label><input id="lot" type="number" min="0.01" step="0.01" value="0.10"></div>
+    <div><label for="sel">Pasangan</label><select id="sel"></select></div></div>
+    <div class="two"><div><label for="sl">Stop loss (pip)</label><input id="sl" type="number" min="0" step="1" placeholder="opsional"></div>
+    <div><label for="tp">Take profit (pip)</label><input id="tp" type="number" min="0" step="1" placeholder="opsional"></div></div>
+    <div class="go"><button class="s" id="sellB">Jual<small id="sP"></small></button><button class="b" id="buyB">Beli<small id="bP"></small></button></div>
+    <div class="info"><span>Margin dibutuhkan: <b id="iM"></b></span><span>Nilai per pip: <b id="iPip"></b></span><span>Spread: <b id="iSp"></b></span></div>
+    <div class="box"><b>Kalkulator risiko</b>
+      <label for="risk">Risiko per trade (% saldo)</label><input id="risk" type="number" min="0.1" step="0.1" value="1">
+      <p id="rOut" style="margin:8px 0 0"></p></div>
+  </aside>
+</main>
+<footer>Simulator dengan uang virtual. Harga dibuat dari rumus waktu, jadi sama untuk semua pemain, tapi bukan harga pasar sungguhan dan bukan saran investasi. Trading forex sungguhan membutuhkan broker berizin dan berisiko tinggi.</footer>
+<div id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const G=()=>(Math.random()+Math.random()+Math.random()-1.5)*2;
+const money=n=>(n<0?"-":"")+"$"+Math.abs(n).toLocaleString("id-ID",{minimumFractionDigits:2,maximumFractionDigits:2});
+const P=[
+ {s:"EUR/USD",b:"EUR",q:"USD",p:1.0850,d:5,pip:.0001,sz:1e5,sp:.8,v:.5},
+ {s:"GBP/USD",b:"GBP",q:"USD",p:1.2940,d:5,pip:.0001,sz:1e5,sp:1.1,v:.6},
+ {s:"USD/JPY",b:"USD",q:"JPY",p:151.80,d:3,pip:.01,sz:1e5,sp:1,v:.6},
+ {s:"AUD/USD",b:"AUD",q:"USD",p:.6520,d:5,pip:.0001,sz:1e5,sp:1,v:.5},
+ {s:"USD/CHF",b:"USD",q:"CHF",p:.8820,d:5,pip:.0001,sz:1e5,sp:1.2,v:.5},
+ {s:"USD/CAD",b:"USD",q:"CAD",p:1.3680,d:5,pip:.0001,sz:1e5,sp:1.3,v:.5},
+ {s:"XAU/USD",b:"XAU",q:"USD",p:2650,d:2,pip:.1,sz:100,sp:3,v:3}
+];
+let S={bal:10000,lev:100,pos:[],his:[],id:1},sel=0,tf=15,tab="pos";
+try{const r=localStorage.getItem("pasarvalas_v1");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem("pasarvalas_v1",JSON.stringify(S))}catch(e){}};
+const H=n=>{n=Math.imul(n^n>>>15,2246822507);n=Math.imul(n^n>>>13,3266489909);return((n^n>>>16)>>>0)/4294967296};
+const PER=[86400,21600,5400,1500,420,110],AM=[260,140,80,45,25,12];
+P.forEach((p,i)=>{p.i=i;p.ph=PER.map((_,k)=>H(i*97+k+1)*6.283)});
+const priceAt=(p,s)=>{let x=0;for(let k=0;k<6;k++)x+=AM[k]*Math.sin(6.283*s/PER[k]+p.ph[k]);x+=(H(s*7+p.i*131)+H(s*13+p.i*17)-1)*2;return p.p+x*p.v*p.pip};
+const nowS=()=>Math.floor(Date.now()/1000);
+function sync(p){const s=nowS();if(!p.t||s-(p.base+p.t.length-1)>4800){p.base=s-4799;p.t=Array.from({length:4800},(_,i)=>priceAt(p,p.base+i))}
+ for(let q=p.base+p.t.length;q<=s;q++){p.t.push(priceAt(p,q));if(p.t.length>5000){p.t.shift();p.base++}}
+ p.px=p.t[p.t.length-1];if(p.ref===undefined)p.ref=p.t[p.t.length-3600]}
+P.forEach(sync);
+const pr=s=>P.find(p=>p.s===s),ask=p=>p.px+p.sp*p.pip,fx=(p,v)=>v.toFixed(p.d);
+const pnl=o=>{const p=pr(o.s),cur=o.t==="buy"?p.px:ask(p),df=o.t==="buy"?cur-o.o:o.o-cur;return p.q==="USD"?df*p.sz*o.l:df*p.sz*o.l/p.px};
+const marg=o=>{const p=pr(o.s);return(p.b==="USD"?o.l*p.sz:o.l*p.sz*o.o)/S.lev};
+const pipVal=(p,l)=>p.q==="USD"?p.pip*p.sz*l:p.pip*p.sz*l/p.px;
+function acct(){const fl=S.pos.reduce((a,o)=>a+pnl(o),0),m=S.pos.reduce((a,o)=>a+marg(o),0),eq=S.bal+fl;return{fl,m,eq,free:eq-m,lvl:m?eq/m*100:null}}
+let tt;function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),2600)}
+
+function close(id,why){const i=S.pos.findIndex(o=>o.id===id);if(i<0)return;const o=S.pos[i],p=pr(o.s),pl=pnl(o),c=o.t==="buy"?p.px:ask(p);
+ S.bal+=pl;S.pos.splice(i,1);S.his.unshift(Object.assign({},o,{c,pl,why,ct:Date.now()}));S.his=S.his.slice(0,100);save();
+ toast(`${o.s} ditutup (${why}): ${money(pl)}`)}
+function open(t){const p=P[sel],l=Math.round(+$("#lot").value*100)/100;if(!(l>=.01)){toast("Lot minimal 0,01");return}
+ const px=t==="buy"?ask(p):p.px,d=t==="buy"?1:-1,sl=+$("#sl").value,tp=+$("#tp").value;
+ const o={id:S.id++,s:p.s,t,l,o:px,sl:sl?px-d*sl*p.pip:null,tp:tp?px+d*tp*p.pip:null,ot:Date.now()};
+ if(marg(o)>acct().free){toast("Margin bebas tidak cukup. Kecilkan lot.");return}
+ S.pos.push(o);save();toast(`${t==="buy"?"Beli":"Jual"} ${l} lot ${p.s} @ ${fx(p,px)}`);ui()}
+
+function tick(){
+ P.forEach(sync);
+ S.pos.slice().forEach(o=>{const p=pr(o.s),c=o.t==="buy"?p.px:ask(p);
+  if(o.sl!=null&&(o.t==="buy"?c<=o.sl:c>=o.sl))close(o.id,"Stop loss");
+  else if(o.tp!=null&&(o.t==="buy"?c>=o.tp:c<=o.tp))close(o.id,"Take profit")});
+ const a=acct();if(a.lvl!==null&&a.lvl<50&&S.pos.length){const w=S.pos.reduce((x,y)=>pnl(x)<pnl(y)?x:y);close(w.id,"Stop out")}
+ ui()}
+
+function candles(p,n){const o=[];let c=null,k=-1;for(let i=0;i<p.t.length;i++){const g=Math.floor((p.base+i)/tf),v=p.t[i];
+ if(g!==k){c={o:v,h:v,l:v,c:v};o.push(c);k=g}else{c.h=Math.max(c.h,v);c.l=Math.min(c.l,v);c.c=v}}return o.slice(-n)}
+function draw(){const cv=$("#cv"),r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,W=r.width,H=r.height;
+ if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+ const x=cv.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
+ const cs=getComputedStyle(document.documentElement),C=v=>cs.getPropertyValue(v).trim(),p=P[sel],cd=candles(p,60);
+ let hi=Math.max(...cd.map(k=>k.h)),lo=Math.min(...cd.map(k=>k.l));const pad=(hi-lo)*.1||p.pip;hi+=pad;lo-=pad;
+ const L=6,R=70,T=8,B=8,w=(W-L-R)/cd.length,Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+ x.font='11px "IBM Plex Sans",system-ui,sans-serif';x.textBaseline="middle";
+ for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4,y=Y(v);x.strokeStyle=C("--ln");x.lineWidth=1;x.beginPath();x.moveTo(L,y);x.lineTo(W-R,y);x.stroke();x.fillStyle=C("--mu");x.fillText(fx(p,v),W-R+6,y)}
+ cd.forEach((k,i)=>{const cx=L+i*w+w/2,up=k.c>=k.o;x.strokeStyle=x.fillStyle=up?C("--buy"):C("--sell");
+  x.beginPath();x.moveTo(cx,Y(k.h));x.lineTo(cx,Y(k.l));x.stroke();
+  const y1=Y(Math.max(k.o,k.c)),hh=Math.max(1,Math.abs(Y(k.o)-Y(k.c)));x.fillRect(cx-w*.35,y1,w*.7,hh)});
+ S.pos.filter(o=>o.s===p.s).forEach(o=>{const y=Y(o.o);x.strokeStyle=C("--ink");x.setLineDash([4,4]);x.beginPath();x.moveTo(L,y);x.lineTo(W-R,y);x.stroke();x.setLineDash([]);
+  x.fillStyle=C("--ink");x.fillText((o.t==="buy"?"Beli ":"Jual ")+o.l,L+4,y-8)});
+ const y=Y(p.px);x.strokeStyle=C("--mu");x.setLineDash([2,3]);x.beginPath();x.moveTo(L,y);x.lineTo(W-R,y);x.stroke();x.setLineDash([]);
+ x.fillStyle=C("--ink");x.fillRect(W-R,y-9,R-2,18);x.fillStyle=C("--pn");x.fillText(fx(p,p.px),W-R+6,y)}
+
+function ui(){
+ const a=acct(),cl=v=>v>=0?"up":"dn";
+ $("#aBal").textContent=money(S.bal);$("#aEq").textContent=money(a.eq);
+ const f=$("#aFl");f.textContent=money(a.fl);f.className=cl(a.fl);
+ $("#aM").textContent=money(a.m);$("#aFree").textContent=money(a.free);$("#aLvl").textContent=a.lvl===null?"–":a.lvl.toFixed(0)+"%";
+ $("#wl").innerHTML=P.map((p,i)=>{const ch=(p.px-p.ref)/p.ref*100;return`<button class="wr ${i===sel?"on":""}" data-i="${i}"><b>${p.s}</b><span>${fx(p,p.px)}</span><small>Jual / Beli ${fx(p,ask(p))}</small><span class="${cl(ch)}">${ch>=0?"+":""}${ch.toFixed(2)}%</span></button>`}).join("");
+ const p=P[sel],l=+$("#lot").value||0;
+ $("#cTitle").textContent=p.s;$("#sP").textContent=fx(p,p.px);$("#bP").textContent=fx(p,ask(p));
+ $("#iM").textContent=money(marg({s:p.s,l,o:p.px}));$("#iPip").textContent=money(pipVal(p,l));$("#iSp").textContent=p.sp+" pip";
+ const sl=+$("#sl").value,risk=+$("#risk").value,pv=pipVal(p,1);
+ $("#rOut").innerHTML=sl>0&&risk>0?`Risiko ${money(S.bal*risk/100)} dengan SL ${sl} pip: <b>${(Math.floor(S.bal*risk/100/(sl*pv)*100)/100).toFixed(2)} lot</b> <button class="link" id="useLot">Pakai</button>`:"Isi stop loss untuk menghitung ukuran lot.";
+ const lab=t=>t==="buy"?"Beli":"Jual";
+ if(tab==="pos"){$("#tbl").innerHTML=S.pos.length?`<table><tr><th>Pasangan</th><th>Jenis</th><th>Lot</th><th>Masuk</th><th>Kini</th><th>SL</th><th>TP</th><th>P&amp;L</th><th></th></tr>`+S.pos.map(o=>{const q=pr(o.s),v=pnl(o);
+   return`<tr><td>${o.s}</td><td>${lab(o.t)}</td><td>${o.l.toFixed(2)}</td><td>${fx(q,o.o)}</td><td>${fx(q,o.t==="buy"?q.px:ask(q))}</td><td>${o.sl!=null?fx(q,o.sl):"–"}</td><td>${o.tp!=null?fx(q,o.tp):"–"}</td><td class="${cl(v)}">${money(v)}</td><td><button class="x" data-c="${o.id}">Tutup</button></td></tr>`}).join("")+"</table>":`<div class="empty">Belum ada posisi. Pilih pasangan, atur lot, lalu tekan Beli atau Jual.</div>`}
+ else{const w=S.his.filter(h=>h.pl>0).length,tot=S.his.reduce((s,h)=>s+h.pl,0);
+  $("#tbl").innerHTML=S.his.length?`<p style="margin:0 0 6px;color:var(--mu)">${S.his.length} trade, menang ${(w/S.his.length*100).toFixed(0)}%, total <b class="${cl(tot)}">${money(tot)}</b></p><table><tr><th>Pasangan</th><th>Jenis</th><th>Lot</th><th>Masuk</th><th>Keluar</th><th>Alasan</th><th>P&amp;L</th></tr>`+S.his.map(h=>{const q=pr(h.s);
+   return`<tr><td>${h.s}</td><td>${lab(h.t)}</td><td>${h.l.toFixed(2)}</td><td>${fx(q,h.o)}</td><td>${fx(q,h.c)}</td><td>${h.why}</td><td class="${cl(h.pl)}">${money(h.pl)}</td></tr>`}).join("")+"</table>":`<div class="empty">Riwayat kosong. Trade yang ditutup akan muncul di sini.</div>`}
+ draw()}
+
+$("#sel").innerHTML=P.map((p,i)=>`<option value="${i}">${p.s}</option>`).join("");
+$("#lev").value=S.lev;
+$("#sel").onchange=e=>{sel=+e.target.value;ui()};
+$("#lev").onchange=e=>{S.lev=+e.target.value;save();ui()};
+["lot","sl","tp","risk"].forEach(i=>$("#"+i).addEventListener("input",ui));
+$("#buyB").onclick=()=>open("buy");$("#sellB").onclick=()=>open("sell");
+$("#wl").onclick=e=>{const b=e.target.closest("[data-i]");if(b){sel=+b.dataset.i;$("#sel").value=sel;ui()}};
+$("#tfs").onclick=e=>{const b=e.target.closest("[data-tf]");if(!b)return;tf=+b.dataset.tf;document.querySelectorAll("#tfs button").forEach(x=>x.classList.toggle("on",x===b));ui()};
+document.querySelector(".tabs").onclick=e=>{const b=e.target.closest("[data-tab]");if(!b)return;tab=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("on",x===b));ui()};
+$("#tbl").onclick=e=>{const b=e.target.closest("[data-c]");if(b){close(+b.dataset.c,"Manual");ui()}};
+document.addEventListener("click",e=>{if(e.target.id==="useLot"){const p=P[sel],v=Math.floor(S.bal*(+$("#risk").value)/100/((+$("#sl").value)*pipVal(p,1))*100)/100;$("#lot").value=Math.max(v,.01).toFixed(2);ui()}});
+$("#closeAll").onclick=()=>{if(!S.pos.length){toast("Tidak ada posisi terbuka");return}S.pos.slice().forEach(o=>close(o.id,"Manual"));ui()};
+let rt;$("#reset").onclick=e=>{const b=e.target;if(b.dataset.arm){S={bal:10000,lev:100,pos:[],his:[],id:1};$("#lev").value=100;save();toast("Akun direset ke $10.000");b.textContent="Reset akun";delete b.dataset.arm;ui()}
+ else{b.dataset.arm=1;b.textContent="Klik lagi untuk reset";clearTimeout(rt);rt=setTimeout(()=>{b.textContent="Reset akun";delete b.dataset.arm},3000)}};
+addEventListener("resize",draw);
+ui();setInterval(tick,500);
+</script>
+</body>
+</html>
